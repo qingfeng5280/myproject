@@ -5,6 +5,8 @@ import com.hu.springboot.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -21,6 +23,8 @@ import java.util.Map;
 public class UserController {
 
 
+
+
     @Autowired
     UserRepository userRepository;
 
@@ -28,6 +32,22 @@ public class UserController {
     protected HttpServletRequest request;
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
+
+
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable("id") Integer id) {
+
+        User user = userRepository.findById(id).get();
+
+        logger.info("姓名:" + user.getLastName());
+        return user;
+    }
+
+    @GetMapping("/user")
+    public User insertUser(User user) {
+        User save = userRepository.save(user);
+        return save;
+    }
 
 
     @RequestMapping(value = "yth", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
@@ -52,25 +72,6 @@ public class UserController {
         jsonObject.put("email", user.getEmail());
         return jsonObject;
     }
-
-
-    @GetMapping("/user/{id}")
-    public User getUser(@PathVariable("id") Integer id) {
-
-        User user = userRepository.findById(id).get();
-
-        logger.info("姓名:" + user.getLastName());
-        return user;
-    }
-
-    @GetMapping("/user")
-    public User insertUser(User user) {
-        User save = userRepository.save(user);
-        return save;
-    }
-
-
-
 
 
 }

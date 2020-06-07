@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 
 
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class LogAspect {
 
     private Logger logger = LoggerFactory.getLogger(LogAspect.class);
@@ -41,18 +41,18 @@ public class LogAspect {
      * @throws Throwable
      */
 
-/*    @Before("webLog()")
+    @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-
-        // 记录下请求内容
-        logger.info("URL : " + request.getRequestURL().toString());
-        logger.info("HTTP_METHOD : " + request.getMethod());
-        logger.info("IP : " + request.getRemoteAddr());
-        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//
+//        // 记录下请求内容
+//        logger.info("URL : " + request.getRequestURL().toString());
+//        logger.info("HTTP_METHOD : " + request.getMethod());
+//        logger.info("IP : " + request.getRemoteAddr());
+//        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+//        logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
         logger.info("前置执行……");
     }
 
@@ -61,28 +61,28 @@ public class LogAspect {
         // 处理完请求，返回内容
         logger.info("RESPONSE : " + ret);
         logger.info("后置执行……");
-    }*/
+    }
 
 
     //后置异常通知
     @AfterThrowing("webLog()")
     public void throwss(JoinPoint jp) {
-        System.out.println("方法异常时执行.....");
+        logger.info("方法异常时执行.....");
     }
 
     //后置最终通知,final增强，不管是抛出异常或者正常退出都会执行
     @After("webLog()")
     public void after(JoinPoint jp) {
-        System.out.println("方法最后执行.....");
+        logger.info("方法最后执行.....");
     }
 
     //环绕通知,环绕增强，相当于MethodInterceptor
     @Around("webLog()")
     public Object arround(ProceedingJoinPoint pjp) {
-        System.out.println("方法环绕start.....");
+        logger.info("方法环绕执行.....");
         try {
             Object o = pjp.proceed();
-            System.out.println("方法环绕proceed，结果是 :" + o);
+            logger.info("方法环绕proceed，结果是 :" + o);
             return o;
         } catch (Throwable e) {
             e.printStackTrace();

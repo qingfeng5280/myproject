@@ -40,6 +40,19 @@
             <!--<scope>runtime</scope>-->
         </dependency>
 
+        <!--mybatis相关-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
         <!-- 单元测试 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,6 +66,16 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>2.1.8.RELEASE</version>
         </dependency>
 
         <!--引入其他的Servlet容器-->
@@ -79,10 +102,6 @@
             <artifactId>bootstrap</artifactId>
             <version>4.0.0</version>
         </dependency>
-
-
-
-
 
         <!--utils工具类所依赖的jar包-->
         <dependency>
@@ -197,6 +216,21 @@
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
 
+
+        <!--  activemq  所需要的jar包-->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.15.12</version>
+        </dependency>
+        <!--  activemq 和 spring 整合的基础包 -->
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+            <version>3.16</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -205,6 +239,47 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- mybatis-generator -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <!--
+                      用maven mybatis插件
+                      如果不在plugin里面添加依赖包得引用的话，会找不到相关得jar包，
+                      在plugin外部得jar包，他不会去找到并执行，
+                      所以要把plugin运行依赖得jar配置都放在里面
+                      -->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.48</version>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <id>mybaits generator</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--允许移动生成的文件-->
+                    <verbose>true</verbose>
+                    <!--允许文件自动覆盖，实际开发中千万不要设置为 true-->
+                    <overwrite>false</overwrite>
+                    <!--generator 配置文件路径-->
+                    <configurationFile>
+                        src/main/resources/mybatis-generator.xml
+                    </configurationFile>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
