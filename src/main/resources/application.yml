@@ -20,13 +20,30 @@ spring:
     port: 6379
     database: 0
     timeout: 1000
-
+ # activemq:
+      # activemq的broker的url
+  #    broker-url: tcp://10.211.55.3:61616
+      # 连接activemq的broker所需的账号和密码
+  #    user: admin
+  #    password: admin
+ # jms:
+      #目的地是queue还是topic， false（默认） = queue    true =  topic
+  #  pub-sub-domain: false
   thymeleaf:
     cache: false
   messages:
     basename: i18n.login
   mvc:
     date-format: yyyy-MM-dd
+
+
+#自定义队列名称。这只是个常量
+myqueue: boot-activemq-queue
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+
 
 
 

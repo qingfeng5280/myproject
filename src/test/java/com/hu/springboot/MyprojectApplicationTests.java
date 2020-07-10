@@ -1,5 +1,7 @@
 package com.hu.springboot;
 
+import com.hu.MyProjectApplication;
+import com.hu.springboot.activemq.produce.Queue_Produce;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.annotation.Resource;
 import javax.jms.*;
 
 
@@ -25,10 +30,13 @@ public class MyprojectApplicationTests {
     public static final String ACTIVEMQ_URL = "tcp://10.211.55.3:61616";
     public static final String QUEUE_NAME = "queue01";
 
+/*    @Resource    //  这个是java 的注解，而Autowried是spring 的
+    private Queue_Produce queue_produce ;
+
     @Test
-    public void demo(){
-        System.out.println("success");
-    }
+    public  void testSend() throws Exception{
+        queue_produce.produceMessage();
+    }*/
 
 
     @Test

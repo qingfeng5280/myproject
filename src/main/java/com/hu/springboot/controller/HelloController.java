@@ -18,7 +18,7 @@ public class HelloController {
 //        return "index";
 //    }
 
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/hello")
     public  String hello(@RequestParam("user") String user){
         if(user.equals("aaa")){
