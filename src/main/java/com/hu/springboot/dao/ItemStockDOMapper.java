@@ -1,9 +1,12 @@
 package com.hu.springboot.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hu.springboot.dataobject.ItemStockDO;
 import org.apache.ibatis.annotations.Param;
 
-public interface ItemStockDOMapper {
+//继承mybatis-plus的BaseMapper，但仍然保留了自定义但
+public interface ItemStockDOMapper{
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(ItemStockDO record);

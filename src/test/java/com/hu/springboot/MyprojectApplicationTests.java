@@ -2,6 +2,8 @@ package com.hu.springboot;
 
 import com.hu.MyProjectApplication;
 import com.hu.springboot.activemq.produce.Queue_Produce;
+import com.hu.springboot.dao.ItemDOMapper;
+import com.hu.springboot.dataobject.ItemDO;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,9 @@ public class MyprojectApplicationTests {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private ItemDOMapper itemDOMapper ;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -65,6 +70,12 @@ public class MyprojectApplicationTests {
         connection.close();
 
         System.out.println("消息发布到MQ完成");
+    }
+
+    @Test
+    public void mybatis(){
+        ItemDO itemDO = itemDOMapper.selectByPrimaryKey(7);
+        System.out.println(itemDO);
     }
 
 

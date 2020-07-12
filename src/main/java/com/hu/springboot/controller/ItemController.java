@@ -1,14 +1,14 @@
 package com.hu.springboot.controller;
 
 import com.hu.springboot.controller.viewobject.ItemVO;
+import com.hu.springboot.dataobject.ItemDO;
 import com.hu.springboot.error.BusinessException;
 import com.hu.springboot.response.CommonReturnType;
 import com.hu.springboot.service.CacheService;
 import com.hu.springboot.service.ItemService;
 import com.hu.springboot.service.model.ItemModel;
+import lombok.extern.log4j.Log4j;
 import org.joda.time.format.DateTimeFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/item")
 @CrossOrigin(origins = {"*"}, allowCredentials = "true")
+@Log4j
 public class ItemController extends BaseController {
 
     @Autowired
@@ -33,8 +34,6 @@ public class ItemController extends BaseController {
     @Autowired
     CacheService cacheService;
 
-    private Logger logger = LoggerFactory.getLogger(com.hu.springboot.controller.ItemController.class);
-
 
     //创建商品的controller
     @RequestMapping(value = "/create", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
@@ -44,7 +43,7 @@ public class ItemController extends BaseController {
                                        @RequestParam(name = "price") BigDecimal price,
                                        @RequestParam(name = "stock") Integer stock,
                                        @RequestParam(name = "imgUrl") String imgUrl) throws BusinessException {
-        logger.info("进入create**********************");
+        log.info("进入create**********************");
 
         //封装service请求用来创建商品
         ItemModel itemModel = new ItemModel();
@@ -96,6 +95,8 @@ public class ItemController extends BaseController {
     @ResponseBody
     public CommonReturnType listItem(){
 
+        log.info("进入list");
+
         List<ItemModel> itemModelList = itemService.listItem();
 
         //使用stream api将list内的itemModel转化为itemVO
@@ -124,6 +125,19 @@ public class ItemController extends BaseController {
             itemVO.setPromoStatus(0);
         }
         return itemVO;
+    }
+
+
+    @RequestMapping(value = "/get1", method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType getItem1(@RequestParam(name = "id")Integer id){
+
+        log.info("进入get1:");
+        ItemDO Item = null;
+
+        Item = itemService.getItemById2(id) ;
+
+        return CommonReturnType.create(Item) ;
     }
 
 }

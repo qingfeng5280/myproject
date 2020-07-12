@@ -40,18 +40,38 @@
             <!--<scope>runtime</scope>-->
         </dependency>
 
-        <!--mybatis相关-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.21</version>
         </dependency>
 
-        <dependency>
+        <!--mybatis相关-->
+  <!--      <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.2</version>
+        </dependency>-->
+
+        <!--mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.2</version>
         </dependency>
+
+        <!--mybatis-plus代码自动生成相关依赖-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.2</version>
+        </dependency>
+
 
         <!-- Hutool是一个小而全的Java工具类库，通过静态方法封装，降低相关API的学习成本，提高工作效率，使Java拥有函数式语言般的优雅，让Java语言也可以“甜甜的”。 -->
         <dependency>
@@ -278,16 +298,16 @@
             </plugin>
 
             <!-- mybatis-generator -->
-            <plugin>
+<!--            <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
-                <!--
+                &lt;!&ndash;
                       用maven mybatis插件
                       如果不在plugin里面添加依赖包得引用的话，会找不到相关得jar包，
                       在plugin外部得jar包，他不会去找到并执行，
                       所以要把plugin运行依赖得jar配置都放在里面
-                      -->
+                      &ndash;&gt;
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
@@ -306,16 +326,16 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--允许移动生成的文件-->
+                    &lt;!&ndash;允许移动生成的文件&ndash;&gt;
                     <verbose>true</verbose>
-                    <!--允许文件自动覆盖，实际开发中千万不要设置为 true-->
+                    &lt;!&ndash;允许文件自动覆盖，实际开发中千万不要设置为 true&ndash;&gt;
                     <overwrite>false</overwrite>
-                    <!--generator 配置文件路径-->
+                    &lt;!&ndash;generator 配置文件路径&ndash;&gt;
                     <configurationFile>
                         src/main/resources/mybatis-generator.xml
                     </configurationFile>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
         </plugins>
     </build>

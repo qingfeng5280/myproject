@@ -7,9 +7,7 @@ import com.hu.springboot.dataobject.ItemStockDO;
 import com.hu.springboot.error.BusinessException;
 import com.hu.springboot.error.EmBusinessError;
 import com.hu.springboot.service.ItemService;
-import com.hu.springboot.service.PromoService;
 import com.hu.springboot.service.model.ItemModel;
-import com.hu.springboot.service.model.PromoModel;
 import com.hu.springboot.validator.ValidationResult;
 import com.hu.springboot.validator.ValidatorImpl;
 import org.slf4j.Logger;
@@ -35,8 +33,6 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemStockDOMapper itemStockDOMapper ;
 
-    @Autowired
-    private PromoService promoService;
 
     private Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
 
@@ -125,8 +121,15 @@ public class ItemServiceImpl implements ItemService {
             itemModel.setPromoModel(promoModel);
         }*/
 
-
         return itemModel;
+    }
+
+    @Override
+    public ItemDO getItemById2(Integer id) {
+        logger.info("id为："+id);
+        ItemDO item = itemDOMapper.selectById(id) ;
+        System.out.println(item);
+        return item;
     }
 
     @Override

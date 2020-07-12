@@ -1,5 +1,6 @@
 package com.hu.springboot.service;
 
+import com.hu.springboot.dataobject.ItemDO;
 import com.hu.springboot.error.BusinessException;
 import com.hu.springboot.service.model.ItemModel;
 
@@ -21,4 +22,7 @@ public interface ItemService {
 
     //商品销量增加
     void increaseSales(Integer itemId, Integer amount) throws BusinessException ;
+
+    //测试mybatis-plus查询
+    ItemDO getItemById2(Integer id);
 }

@@ -1,11 +1,12 @@
 package com.hu.springboot.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hu.springboot.dataobject.ItemDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface ItemDOMapper {
+public interface ItemDOMapper extends BaseMapper<ItemDO>{
 
     List<ItemDO> listItem() ;
 

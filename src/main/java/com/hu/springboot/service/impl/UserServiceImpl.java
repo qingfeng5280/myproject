@@ -87,10 +87,7 @@ public class UserServiceImpl implements UserService {
 
         UserDO userDO = userDOMapper.selectByTelephone(telephone);
 
-
         if (userDO == null) {
-            logger.info("抛出异常");
-
             throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
         }
         UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
